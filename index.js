@@ -1,8 +1,26 @@
-import e from "express";
+import express from "express";
+import "dotenv/config";
 
-const app = e();
-const port = 8800;
+import fs from "node:fs";
+import path from "node:path";
+import https from "node:https";
 
-app.listen(port, () => {
-  console.log(`listening at port ${port}`);
+const app = express();
+const port = process.env.PORT;
+const privateKey = fs.readFileSync("ca.key");
+const certificate = fs.readFileSync("ca.crt");
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  passphrase: process.env.CERT_PASSWORD,
+};
+
+app.use(express.static(path.join(path.dirname("."), "public")));
+
+app.get("/", (_, res) => {
+  res.redirect("/index.html");
 });
+
+const httpsServer = https.createServer(credentials, app);
+console.log(`listening at port ${port}`);
+httpsServer.listen(port);
