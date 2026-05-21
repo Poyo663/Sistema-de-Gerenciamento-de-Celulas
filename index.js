@@ -5,6 +5,9 @@ import fs from "node:fs";
 import path from "node:path";
 import https from "node:https";
 
+import client from "./src/models/postgres.js";
+
+await client.connect();
 const app = express();
 const port = process.env.PORT;
 const privateKey = fs.readFileSync("ca.key");
@@ -24,3 +27,4 @@ app.get("/", (_, res) => {
 const httpsServer = https.createServer(credentials, app);
 console.log(`listening at port ${port}`);
 httpsServer.listen(port);
+await client.end();
