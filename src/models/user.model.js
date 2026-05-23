@@ -4,11 +4,19 @@ export default class Student {
   static async createStudent(data) {
     // TODO: checar se não tem email
     try {
-      await client.query(
-        "INSERT INTO aluno(matricula, nome, email, senha) VALUES($1, $2, $3, $4)",
-        //$1-------------$2---------$3----------$4--------
-        [data.matricula, data.nome, data.email, data.senha],
-      );
+      if (data.email) {
+        await client.query(
+          "INSERT INTO aluno(matricula, nome, email, senha) VALUES($1, $2, $3, $4)",
+          //$1-------------$2---------$3----------$4--------
+          [data.matricula, data.nome, data.email, data.senha],
+        );
+      } else {
+        await client.query(
+          "INSERT INTO aluno(matricula, nome, senha) VALUES($1, $2, $4)",
+          //$1-------------$2---------$3----------$4--------
+          [data.matricula, data.nome, data.senha],
+        );
+      }
       return true;
     } catch (err) {
       return false;
