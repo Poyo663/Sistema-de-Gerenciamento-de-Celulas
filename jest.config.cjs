@@ -1,6 +1,9 @@
 module.exports = {
+  transform: {
+    '^.+\\.[t|j]sx?$': 'babel-jest',
+  },
   transformIgnorePatterns: [
-    // Ignore all node_modules EXCEPT the one causing the error
-    "node_modules/(?!(@faker-js)/)"
+    '/node_modules/(?!@faker-js/)',
   ],
 };
+

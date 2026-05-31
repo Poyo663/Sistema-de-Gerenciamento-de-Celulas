@@ -1,7 +1,6 @@
-import client from "./postgres";
+import client from "./postgres.js";
 
 export class Celula {
-  // TODO: adicionar selecao e teste de selecao
   static async deleteCelula(id) {
     try {
       if (id) {
@@ -20,22 +19,24 @@ export class Celula {
   static async findCelula(identifier) {
     try {
       if (typeof identifier === "number") {
-        const { rows, fields, rowCount } = client.query(
+        const { rows, fields, rowCount } = await client.query(
           "SELECT * FROM celula WHERE id = $1;",
           [identifier],
         );
         return { rows, fields, rowCount };
       } else if (typeof identifier === "string") {
-        const { rows, fields, rowCount } = client.query(
+        const { rows, fields, rowCount } = await client.query(
           "SELECT * FROM celula ORDER BY nome <-> $1;",
           [identifier],
         );
         return { rows, fields, rowCount };
+      } else {
+        console.log("ERRRRRROOOOOOOOOOOOR");
+        return undefined;
       }
-      else return {};
     } catch (err) {
       console.error(err);
-      return {};
+      return undefined;
     }
   }
 }
