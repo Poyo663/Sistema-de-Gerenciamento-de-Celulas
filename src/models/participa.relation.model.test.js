@@ -52,8 +52,6 @@ afterAll(async () => {
 });
 
 test("Criando a relação", async () => {
-  console.log(celulas[0].nome);
-  console.log(typeof celulas[0].nome);
   const c = await Celula.findCelula(celulas[0].nome);
   expect(
     await new ParticipaBuilder(c.rows[0].id, estudantes[0].matricula).build(),
@@ -62,7 +60,6 @@ test("Criando a relação", async () => {
 
 test("Procurando participantes pelo id da célula", async () => {
   const c = await Celula.findCelula(celulas[0].nome);
-  // console.log(c);
   expect((await Participa.findParticipantes(c.rows[0].id)).rows).toBeTruthy();
 });
 
@@ -73,10 +70,7 @@ test("Procurando celulas pelo participante", async () => {
 });
 
 test("Um participante saindo de uma célula", async () => {
-  console.log(celulas[0].nome);
-  console.log(typeof celulas[0].nome);
   const c = await Celula.findCelula(celulas[0].nome);
-  console.log(c.rows[0]);
   expect(
     await Participa.deleteParticipante(c.rows[0].id, estudantes[0].matricula),
   ).toBeTruthy();

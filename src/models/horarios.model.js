@@ -1,3 +1,5 @@
+import client from "./postgres.js";
+
 export class Horarios {
   static async findHorarios(id_celula) {
     try {
@@ -9,6 +11,31 @@ export class Horarios {
     } catch (err) {
       console.error(err);
       return undefined;
+    }
+  }
+
+  static async deleteHorarios(id_celula) {
+    try {
+      await client.query("DELETE FROM celula_horarios WHERE id_celula = $1", [
+        id_celula,
+      ]);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
+
+  static async editHorarios(id_celula, newHorario) {
+    try {
+      await client.query(
+        "UPDATE celula_horarios SET horario = $1 WHERE id_celula = $2",
+        [newHorario, id_celula],
+      );
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
     }
   }
 }
@@ -40,7 +67,7 @@ export class HorariosBuilder {
 
     try {
       await client.query(
-        `INSERT INTO participa(${fields}) VALUES(${fieldValues})`,
+        `INSERT INTO celula_horarios(${fields}) VALUES(${fieldValues})`,
         values,
       );
       return true;
