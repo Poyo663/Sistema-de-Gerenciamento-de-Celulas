@@ -18,5 +18,6 @@ Organizamos e gerenciamos nosso projeto utilizando as seguintes plataformas:
 ---
 
 ## Dependências
-* **node v24.12.0**
-* **postgres v17.10**
+node v24.12.0
+postgres v17.10
+postgres needs 'pg_trgm' extension
