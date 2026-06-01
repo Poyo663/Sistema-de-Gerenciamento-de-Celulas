@@ -43,10 +43,4 @@ CREATE TABLE frequencia (
     presente BOOLEAN
 );
 
-CREATE TABLE frequenta (
-    matricula VARCHAR(50) REFERENCES aluno(matricula) ON DELETE CASCADE,
-    id_frequencia INT REFERENCES frequencia(id) ON DELETE CASCADE,
-    PRIMARY KEY (matricula, id_frequencia)
-);
-
-ALTER TABLE frequencia ADD COLUMN matricula VARCHAR(50) REFERENCES aluno(matricula);
+-- ALTER TABLE frequencia ADD COLUMN matricula VARCHAR(50) REFERENCES aluno(matricula);
