@@ -42,8 +42,6 @@ beforeAll(async () => {
       .setPreRequisitos(celulas[i].prerequisitos)
       .build();
   }
-  // const c = await Celula.findCelula(celulas[0].nome);
-  // await new ParticipaBuilder(c.rows[0].id, estudantes[0].matricula).build();
 });
 
 afterAll(async () => {
