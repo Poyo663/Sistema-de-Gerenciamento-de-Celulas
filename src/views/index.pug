@@ -1,5 +1,12 @@
 doctype html
 
-p variable is: #{logged}
+if logged 
+  p You are logged in 
+else 
+  p You are not logged in
 each val in rows 
-  p Nome: #{val.nome}, Descrição: #{val.descricao}
+  - const path = "/celula/" + val.id
+  div 
+    p Nome: #{val.nome}, Descrição: #{val.descricao}
+    p 
+      a(href=path) Saiba mais

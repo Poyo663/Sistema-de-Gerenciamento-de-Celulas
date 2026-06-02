@@ -1,6 +1,5 @@
 import pug from "pug";
-import { Celula, CelulaBuilder } from "../models/celula.model.js";
-import { faker } from "@faker-js/faker";
+import { Celula } from "../models/celula.model.js";
 
 const mainPageFunction = pug.compileFile("./src/views/index.pug");
 

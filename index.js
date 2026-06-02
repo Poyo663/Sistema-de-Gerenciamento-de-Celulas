@@ -7,6 +7,7 @@ import https from "node:https";
 
 import client from "./src/models/postgres.js";
 import { mainPage } from "./src/controllers/main.controller.js";
+import { celulaPage } from "./src/controllers/celula.controller.js";
 
 await client.connect();
 const app = express();
@@ -19,9 +20,10 @@ const credentials = {
   passphrase: process.env.CERT_PASSWORD,
 };
 
-// app.use(express.static(path.join(path.dirname("."), "public")));
+app.use(express.static(path.join(path.dirname("."), "public")));
 
 app.get("/", mainPage);
+app.get("/celula/:id", celulaPage);
 
 const httpsServer = https.createServer(credentials, app);
 console.log(`listening at port ${port}`);
