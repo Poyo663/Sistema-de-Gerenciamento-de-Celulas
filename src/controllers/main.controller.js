@@ -5,10 +5,10 @@ const mainPageFunction = pug.compileFile("./src/views/index.pug");
 
 export async function mainPage(req, res) {
   const { rows } = await Celula.findCelula();
-  console.log(rows);
+  console.log(req.authenticated);
   res.send(
     mainPageFunction({
-      logged: false,
+      logged: req.authenticated,
       rows,
     }),
   );

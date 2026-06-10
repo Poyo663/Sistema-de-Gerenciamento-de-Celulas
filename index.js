@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import "dotenv/config";
 
 import fs from "node:fs";
@@ -8,6 +9,8 @@ import https from "node:https";
 import client from "./src/models/postgres.js";
 import { mainPage } from "./src/controllers/main.controller.js";
 import { celulaPage } from "./src/controllers/celula.controller.js";
+import { cadastroUsuario } from "./src/controllers/usuario.controller.js";
+import Authenticate from "./src/middleware/autheticate.middleware.js";
 
 await client.connect();
 const app = express();
@@ -20,10 +23,17 @@ const credentials = {
   passphrase: process.env.CERT_PASSWORD,
 };
 
+// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.use(Authenticate);
 app.use(express.static(path.join(path.dirname("."), "public")));
 
 app.get("/", mainPage);
 app.get("/celula/:id", celulaPage);
+
+app.post("/usuario/cadastro", cadastroUsuario);
 
 const httpsServer = https.createServer(credentials, app);
 console.log(`listening at port ${port}`);
