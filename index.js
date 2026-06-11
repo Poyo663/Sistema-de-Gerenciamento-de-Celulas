@@ -9,7 +9,7 @@ import https from "node:https";
 import client from "./src/models/postgres.js";
 import { mainPage } from "./src/controllers/main.controller.js";
 import { celulaPage } from "./src/controllers/celula.controller.js";
-import { cadastroUsuario } from "./src/controllers/usuario.controller.js";
+import { cadastroUsuario, loginUsuario } from "./src/controllers/usuario.controller.js";
 import Authenticate from "./src/middleware/autheticate.middleware.js";
 
 await client.connect();
@@ -34,6 +34,7 @@ app.get("/", mainPage);
 app.get("/celula/:id", celulaPage);
 
 app.post("/usuario/cadastro", cadastroUsuario);
+app.post("/usuario/login", loginUsuario);
 
 const httpsServer = https.createServer(credentials, app);
 console.log(`listening at port ${port}`);

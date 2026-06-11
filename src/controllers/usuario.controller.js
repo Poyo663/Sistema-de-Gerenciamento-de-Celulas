@@ -35,3 +35,35 @@ export async function cadastroUsuario(req, res) {
     res.send(400);
   }
 }
+
+export async function loginUsuario(req, res) {
+  const result = await Student.findStudent({
+    matricula: req.body.matricula,
+  });
+  if (result) {
+    if (result.rows[0].senha === req.body.senha) {
+      const jwtoken = jwt.sign(
+        {
+          matricula: result.rows[0].matricula,
+          senha: result.rows[0].senha,
+        },
+        process.env.CRYPTOSECRET,
+        { expiresIn: tokenTime },
+      );
+      res.cookie("auth_token", jwtoken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: tokenTime,
+      });
+      res.status(201);
+      res.redirect("/");
+    } else {
+      res.send(400);
+      console.log("senha nao corresponde");
+    }
+  } else {
+    res.send(400);
+    console.log("sem resultado");
+  }
+}
