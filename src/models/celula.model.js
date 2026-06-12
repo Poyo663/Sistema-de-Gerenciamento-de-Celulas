@@ -39,6 +39,18 @@ export class Celula {
       return undefined;
     }
   }
+
+  static async findCelula() {
+    try {
+      const { rows, fields, rowCount } = await client.query(
+        "SELECT * FROM celula",
+      );
+      return { rows, fields, rowCount };
+    } catch (err) {
+      console.error(err);
+      return undefined;
+    }
+  }
 }
 
 export class CelulaBuilder {

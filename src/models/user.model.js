@@ -25,14 +25,14 @@ export default class Student {
 
   static async deleteStudent(data) {
     try {
-      if (data.matricula) {
+      if (data.nome) {
         await client.query(
           "DELETE FROM aluno WHERE nome = $1",
           //$1-----------
           [data.nome],
         );
         return true;
-      } else if (data.nome) {
+      } else if (data.matricula) {
         await client.query(
           "DELETE FROM aluno WHERE matricula = $1",
           //$1-----------
@@ -42,6 +42,28 @@ export default class Student {
       } else return false;
     } catch (err) {
       return false;
+    }
+  }
+
+  static async findStudent(data) {
+    try {
+      if (data.matricula) {
+        const { rows, fields, rowCount } = await client.query(
+          "SELECT * FROM aluno WHERE matricula = $1",
+          //$1-----------
+          [data.matricula],
+        );
+        return { rows, fields, rowCount };
+        // } else if (data.nome) {
+        //   await client.query(
+        //     "DELETE FROM aluno WHERE matricula = $1",
+        //     //$1-----------
+        //     [data.matricula],
+        //   );
+        //   return true;
+      } else return {};
+    } catch (err) {
+      return {};
     }
   }
 }

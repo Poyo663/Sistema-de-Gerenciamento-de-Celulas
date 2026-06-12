@@ -3,17 +3,6 @@ const { faker } = require("@faker-js/faker");
 import client from "./postgres.js";
 import { Celula, CelulaBuilder } from "./celula.model.js";
 
-// const data = {
-//   id: 1,
-//   nome: "Celula de clash of clans",
-//   descricao: "Jogamos clash of clans aqui",
-//   locais: "Bloco 1 Lab 1",
-//   horas: 45,
-//   responsavel: "Anna",
-//   orientador: "Elvis",
-//   prerequisitos: "Um celular",
-// };
-
 const data = [];
 const len = 30;
 for (let i = 0; i < len; i++) {
