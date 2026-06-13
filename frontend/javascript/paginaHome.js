@@ -1,4 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const linksNavegacao = document.querySelectorAll('.item-navegacao');
+
+  linksNavegacao.forEach(link => {
+    link.addEventListener('click', (evento) => {
+      const destino = link.href;
+
+      if (destino && destino !== window.location.href && !destino.includes('#')) {
+        evento.preventDefault(); 
+        
+        document.body.classList.add('animacao-saida');
+
+        setTimeout(() => {
+          window.location.href = destino;
+        }, 400); 
+      }
+    });
+  });
+
   const carrosseis = document.querySelectorAll('.container-carrossel');
 
   carrosseis.forEach(container => {
