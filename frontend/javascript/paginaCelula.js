@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuDropdown = document.querySelector('.menu-dropdown');
 
   if (iconePerfil && menuDropdown) {
-    
     iconePerfil.addEventListener('click', (evento) => {
       evento.stopPropagation(); 
       menuDropdown.classList.toggle('mostrar');
@@ -75,4 +74,52 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  const botoesAba = document.querySelectorAll('.aba-celula');
+  const telasConteudo = document.querySelectorAll('.tela-celula');
+
+  if (botoesAba.length > 0) {
+    botoesAba.forEach(botao => {
+      botao.addEventListener('click', () => {
+        
+        botoesAba.forEach(b => b.classList.remove('ativo'));
+        telasConteudo.forEach(tela => tela.classList.remove('ativa'));
+
+        botao.classList.add('ativo');
+
+        const idDaTelaAlvo = botao.getAttribute('data-alvo');
+        const telaParaMostrar = document.getElementById(idDaTelaAlvo);
+        
+        if (telaParaMostrar) {
+          telaParaMostrar.classList.add('ativa');
+        }
+      });
+    });
+  }
+
+  const btnAddEncontro = document.getElementById('btnAdicionarEncontro');
+  const listaEncontros = document.getElementById('lista-encontros');
+
+  if (btnAddEncontro && listaEncontros) {
+    btnAddEncontro.addEventListener('click', () => {
+      
+      const novaLinha = document.createElement('div');
+      novaLinha.classList.add('linha-encontro');
+      
+      novaLinha.innerHTML = `
+        <input type="text" placeholder="Dia (Ex: Sexta)" required class="input-encontro">
+        <input type="time" required class="input-encontro">
+        <input type="text" placeholder="Local (Ex: Sala 204)" required class="input-encontro">
+        <button type="button" class="btn-remover-linha" title="Remover encontro">🗑️</button>
+      `;
+
+      listaEncontros.appendChild(novaLinha);
+
+      const btnRemover = novaLinha.querySelector('.btn-remover-linha');
+      btnRemover.addEventListener('click', () => {
+        novaLinha.remove();
+      });
+    });
+  }
+
 });
