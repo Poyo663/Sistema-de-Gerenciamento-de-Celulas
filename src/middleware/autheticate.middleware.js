@@ -15,9 +15,13 @@ export default async function Authenticate(req, res, next) {
     // else
     //   throw new Error();
     req.authenticated = true;
+    res.cookie("authenticated", true);
+    res.cookie("nome", s.rows[0].nome);
     next();
   } catch (error) {
+    console.log("ERROR ON AUTHETICATION");
     req.authenticated = false;
+    res.cookie("authenticated", false);
     next();
   } finally {
     // console.log("request " + req.autheticated);

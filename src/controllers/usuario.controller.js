@@ -5,6 +5,12 @@ import Student from "../models/user.model.js";
 
 // Token dura 1 dia
 const tokenTime = 60 * 60 * 24;
+const tokenOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+  maxAge: tokenTime,
+};
 
 export async function cadastroUsuario(req, res) {
   // console.log(req.body);
@@ -24,12 +30,7 @@ export async function cadastroUsuario(req, res) {
       process.env.CRYPTOSECRET,
       { expiresIn: tokenTime },
     );
-    res.cookie("auth_token", jwtoken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: tokenTime,
-    });
+    res.cookie("auth_token", jwtoken, tokenOptions);
     res.status(201);
     res.redirect("/");
   } else {
@@ -52,12 +53,7 @@ export async function loginUsuario(req, res) {
         process.env.CRYPTOSECRET,
         { expiresIn: tokenTime },
       );
-      res.cookie("auth_token", jwtoken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: tokenTime,
-      });
+      res.cookie("auth_token", jwtoken, tokenOptions);
       res.status(201);
       res.redirect("/");
     } else {
