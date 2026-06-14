@@ -3,6 +3,7 @@ import "dotenv/config";
 
 import Student from "../models/user.model.js";
 
+// Token dura 1 dia
 const tokenTime = 60 * 60 * 24;
 
 export async function cadastroUsuario(req, res) {
@@ -32,13 +33,14 @@ export async function cadastroUsuario(req, res) {
     res.status(201);
     res.redirect("/");
   } else {
-    res.send(400);
+    res.status(400);
+    res.send("Erro ao tentar criar");
   }
 }
 
 export async function loginUsuario(req, res) {
   const result = await Student.findStudent({
-    matricula: req.body.matricula,
+    email: req.body.email,
   });
   if (result) {
     if (result.rows[0].senha === req.body.senha) {

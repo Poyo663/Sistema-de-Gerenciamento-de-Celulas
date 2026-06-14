@@ -61,9 +61,16 @@ export default class Student {
         //     [data.matricula],
         //   );
         //   return true;
-      } else return {};
+      } else if (data.email) {
+        const { rows, fields, rowCount } = await client.query(
+          "SELECT * FROM aluno WHERE email = $1",
+          //$1-----------
+          [data.email],
+        );
+        return { rows, fields, rowCount };
+      } else return null;
     } catch (err) {
-      return {};
+      return null;
     }
   }
 }

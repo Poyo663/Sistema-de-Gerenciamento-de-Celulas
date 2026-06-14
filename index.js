@@ -23,16 +23,21 @@ const credentials = {
   passphrase: process.env.CERT_PASSWORD,
 };
 
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(Authenticate);
 app.use(express.static(path.join(path.dirname("."), "public")));
+app.use((req, res, next) => {
+  console.log(req.cookies);
+  console.log("Req body " + req.body);
+  next();
+});
 
 app.get("/", mainPage);
-app.use('/celula', celulaRouter);
-app.use('/usuario', usuarioRouter);
+app.use("/celula", celulaRouter);
+app.use("/usuario", usuarioRouter);
 
 const httpsServer = https.createServer(credentials, app);
 console.log(`listening at port ${port}`);

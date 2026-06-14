@@ -5,23 +5,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmarSenhaInput = document.getElementById('confirmarSenha');
 
   allInputs.forEach(input => {
- 
+    // Evento quando o usuário sai do campo de texto
     input.addEventListener('blur', () => {
-      const wrapper = input.closest('.input-wrapper');
-      const errorMsg = wrapper.querySelector('.error-msg');
+      const wrapper = input.closest('.envoltorio-entrada');
+      const errorMsg = wrapper.querySelector('.mensagem-erro');
       
       if (input.value.trim() === '') {
-        wrapper.classList.add('has-error');
+        wrapper.classList.add('tem-erro');
         if(errorMsg) errorMsg.textContent = 'Este campo é obrigatório';
       } else {
-        wrapper.classList.remove('has-error');
+        wrapper.classList.remove('tem-erro');
       }
     });
 
+    // Evento enquanto o usuário digita
     input.addEventListener('input', () => {
-      const wrapper = input.closest('.input-wrapper');
+      const wrapper = input.closest('.envoltorio-entrada');
       if (input.value.trim() !== '') {
-        wrapper.classList.remove('has-error');
+        wrapper.classList.remove('tem-erro');
       }
     });
   });
@@ -29,18 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function validarSenhas() {
     if (!senhaInput || !confirmarSenhaInput) return;
 
-    const wrapperConfirmar = confirmarSenhaInput.closest('.input-wrapper');
-    const msgErroConfirmar = wrapperConfirmar.querySelector('.error-msg');
+    const wrapperConfirmar = confirmarSenhaInput.closest('.envoltorio-entrada');
+    const msgErroConfirmar = wrapperConfirmar.querySelector('.mensagem-erro');
 
     if (confirmarSenhaInput.value.length > 0) {
       if (senhaInput.value !== confirmarSenhaInput.value) {
         confirmarSenhaInput.setCustomValidity("As senhas não são iguais");
-        wrapperConfirmar.classList.add('has-error');
+        wrapperConfirmar.classList.add('tem-erro');
         if (msgErroConfirmar) msgErroConfirmar.textContent = 'As senhas digitadas não são iguais';
         
       } else {
         confirmarSenhaInput.setCustomValidity("");
-        wrapperConfirmar.classList.remove('has-error');
+        wrapperConfirmar.classList.remove('tem-erro');
         if (msgErroConfirmar) msgErroConfirmar.textContent = 'Este campo é obrigatório';
       }
     } else {
@@ -53,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmarSenhaInput.addEventListener('input', validarSenhas);
   }
 
-
-  if (form) {
-    form.addEventListener('submit', (evento) => {
-      evento.preventDefault(); 
-      
-      window.location.href = '../html/paginaHome.html';
-    });
-  }
+  // if (form) {
+  //   form.addEventListener('submit', (evento) => {
+  //     evento.preventDefault(); 
+  //     
+  //     // Redireciona para a home após o cadastro
+  //     window.location.href = '../html/paginaHome.html';
+  //   });
+  // }
 });
