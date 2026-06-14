@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGCélulas</title>
+    <link rel="icon" type="image/png" href="../imagens/icon.png">
+
+    <link rel="stylesheet" href="../css/paginaRecuperarSenha.css"/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+    <script src="../javascript/paginaRecuperarSenha.js" defer></script>
+  </head>
+  <body>
+    <div class="conteiner-logo">
+      <img class="logo" src="../imagens/logo.png" alt="Logo do Sistema">
+    </div>
+
+    <div class="conteiner-pagina">
+      <div class="layout-dividido">
+        
+        <div class="coluna-imagem">
+          <img src="../imagens/ilustracao.jpg" alt="Ilustração da porta" class="ilustracao" />
+        </div>
+
+        <div class="coluna-formulario">
+          <h1 class="texto-boas-vindas">Vamos trocar sua senha</h1>
+
+          <div class="cartao-login">
+            <h2 class="titulo-cartao">Informe o seu email de login</h2>
+
+            <form id="formRecuperar">
+              
+              <div class="envoltorio-entrada">
+                <span class="rotulo-superior">Digite aqui o seu email</span>
+                
+                <div class="grupo-entrada">
+                  <svg class="icone" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                  <input
+                    type="email"
+                    id="emailRecuperacao"
+                    placeholder="Digite aqui o seu email"
+                    required
+                  />
+                </div>
+                <span class="mensagem-erro">Este campo deve ser um email válido</span>
+              </div>
+
+              <div class="conteiner-links">
+                <p>Concluiu? <a href="../html/paginaLogin.html">Entre no sistema.</a></p>
+              </div>
+
+              <button type="submit" class="botao-enviar">ENVIAR</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

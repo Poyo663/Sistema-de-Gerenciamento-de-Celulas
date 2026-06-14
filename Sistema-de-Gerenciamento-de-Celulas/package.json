@@ -1,0 +1,34 @@
+{
+  "name": "sistema-de-gerenciamento-de-celulas",
+  "version": "1.0.0",
+  "description": "Um sistema para o gerenciamento de celulas existentes na ufc",
+  "homepage": "https://github.com/Poyo663/Sistema-de-Gerenciamento-de-Celulas#readme",
+  "bugs": {
+    "url": "https://github.com/Poyo663/Sistema-de-Gerenciamento-de-Celulas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poyo663/Sistema-de-Gerenciamento-de-Celulas.git"
+  },
+  "license": "ISC",
+  "author": "Anna de Azevedo Maciel",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --runInBand",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "@faker-js/faker": "^10.4.0",
+    "babel-jest": "^30.4.1",
+    "jest": "^30.4.2",
+    "nodemon": "^3.1.14"
+  }
+}
