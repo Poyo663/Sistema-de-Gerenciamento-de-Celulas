@@ -19,9 +19,12 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "pg": "^8.21.0"
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.21.0",
+    "pug": "^3.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
