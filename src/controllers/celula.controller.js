@@ -1,5 +1,8 @@
+import path from "path";
+
 import pug from "pug";
 import { Celula, CelulaBuilder } from "../models/celula.model.js";
+import { fileURLToPath } from "url";
 
 const celulaPageFunction = pug.compileFile("./src/views/celula.pug");
 
@@ -10,8 +13,24 @@ export async function getCelulas(req, res) {
 }
 
 export async function celulaPage(req, res) {
-  const { rows } = await Celula.findCelula(Math.floor(Number(req.params.id)));
-  res.send(celulaPageFunction({ celula: rows[0] }));
+  res.sendFile(
+    path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../../public/html/detalhesCelula.html",
+    ),
+  );
+}
+
+export async function celulaId(req, res) {
+  const id = Number(req.params.id);
+  const c = await Celula.findCelula(Math.floor(Number(req.params.id)));
+  if (c) {
+    for (let i = 0; i < c.rows.length; i++) {
+      if (c.rows[i].id === id) res.send(c.rows[i]);
+    }
+  } else {
+    res.send({});
+  }
 }
 
 export async function createCelula(req, res) {
