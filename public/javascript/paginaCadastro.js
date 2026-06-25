@@ -52,11 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmarSenhaInput.addEventListener('input', validarSenhas);
   }
 
-  if (form) {
-    form.addEventListener('submit', (evento) => {
-      evento.preventDefault(); 
-      
-      window.location.href = '../html/paginaHome.html';
-    });
-  }
+  // if (form) {
+  //   form.addEventListener('submit', (evento) => {
+  //     evento.preventDefault(); 
+  //     
+  //     window.location.href = '../html/paginaHome.html';
+  //   });
+  // }
 });
