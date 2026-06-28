@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmarSenhaInput = document.getElementById('confirmarSenha');
 
   allInputs.forEach(input => {
+<<<<<<< HEAD
+=======
+    // Evento quando o usuário sai do campo de texto
+>>>>>>> 6abf74b (frontend inicial 1.2)
     input.addEventListener('blur', () => {
       const wrapper = input.closest('.envoltorio-entrada');
       const errorMsg = wrapper.querySelector('.mensagem-erro');
@@ -17,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Evento enquanto o usuário digita
     input.addEventListener('input', () => {
       const wrapper = input.closest('.envoltorio-entrada');
       if (input.value.trim() !== '') {
@@ -52,11 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmarSenhaInput.addEventListener('input', validarSenhas);
   }
 
-  // if (form) {
-  //   form.addEventListener('submit', (evento) => {
-  //     evento.preventDefault(); 
-  //     
-  //     window.location.href = '../html/paginaHome.html';
-  //   });
-  // }
+  if (form) {
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault(); 
+      
+      // Redireciona para a home após o cadastro
+      window.location.href = '../html/paginaHome.html';
+    });
+  }
 });

@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // if (form) {
-  //   form.addEventListener('submit', (evento) => {
-  //     evento.preventDefault();
-  //     
-  //     window.location.href = '../html/paginaHome.html'; 
-  //   });
-  // }
+  if (form) {
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      
+      window.location.href = '../html/paginaHome.html'; 
+    });
+  }
 });
