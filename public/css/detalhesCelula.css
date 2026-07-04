@@ -69,7 +69,7 @@ body {
 }
 
 .btn-voltar svg { width: 20px; height: 20px; fill: currentColor; }
-.btn-voltar:hover { transform: translateX(-5px); /* Dá um empurrãozinho para trás */ }
+.btn-voltar:hover { transform: translateX(-5px); }
 
 .container-painel-detalhes {
   display: flex;

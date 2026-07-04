@@ -1,8 +1,11 @@
 import path from "path";
-
+import jwt from "jsonwebtoken";
+import "dotenv/config";
 import pug from "pug";
+
 import { Celula, CelulaBuilder } from "../models/celula.model.js";
 import { fileURLToPath } from "url";
+import { Participa } from "../models/participa.relation.model.js";
 
 const celulaPageFunction = pug.compileFile("./src/views/celula.pug");
 
@@ -51,4 +54,18 @@ export async function createCelula(req, res) {
       res.send("Nao foi possivel criar a celula");
     }
   } else res.redirect("/html/paginaLogin.html");
+}
+
+export async function getParticipa(req, res) {
+  if (req.authenticated) {
+    console.log(req.cookies);
+    const payload = jwt.verify(
+      req.cookies.auth_token,
+      process.env.CRYPTOSECRET,
+    );
+    const { rows } = await Participa.findParticipa(payload.matricula);
+    res.json(rows);
+  } else {
+    res.json([]);
+  }
 }
