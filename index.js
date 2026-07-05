@@ -11,6 +11,7 @@ import Authenticate from "./src/middleware/autheticate.middleware.js";
 import { mainPage } from "./src/controllers/main.controller.js";
 import celulaRouter from "./src/routers/celula.router.js";
 import usuarioRouter from "./src/routers/usuario.router.js";
+import pagesRouter from "./src/routers/pages.router.js";
 
 await client.connect();
 const app = express();
@@ -37,6 +38,7 @@ app.use(express.static(path.join(path.dirname("."), "public")));
 // });
 
 app.get("/", mainPage);
+app.use("/pages", pagesRouter)
 app.use("/celula", celulaRouter);
 app.use("/usuario", usuarioRouter);
 

@@ -2,7 +2,6 @@ import express from "express";
 
 import {
   celulaId,
-  celulaPage,
   createCelula,
   editCelula,
   getCelulas,
@@ -13,7 +12,6 @@ import {
 const celulaRouter = express.Router();
 
 celulaRouter.get("/", getCelulas);
-celulaRouter.get("/:id", celulaPage);
 celulaRouter.get("/api/participa", getParticipa);
 celulaRouter.get("/api/responsavel", getFromResponsavel);
 celulaRouter.get("/api/:id", celulaId);
