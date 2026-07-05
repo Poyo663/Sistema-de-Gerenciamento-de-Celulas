@@ -58,7 +58,7 @@ export async function createCelula(req, res) {
 
 export async function getParticipa(req, res) {
   if (req.authenticated) {
-    console.log(req.cookies);
+    // console.log(req.cookies);
     const payload = jwt.verify(
       req.cookies.auth_token,
       process.env.CRYPTOSECRET,
@@ -67,5 +67,44 @@ export async function getParticipa(req, res) {
     res.json(rows);
   } else {
     res.json([]);
+  }
+}
+
+export async function getFromResponsavel(req, res) {
+  if (req.authenticated) {
+    if (process.env.NODE_ENV === "production") {
+      console.log(req.cookies);
+      const payload = jwt.verify(
+        req.cookies.auth_token,
+        process.env.CRYPTOSECRET,
+      );
+      const { rows } = await Celula.findCelulaByResponsible(req.cookies.nome);
+      res.json(rows);
+    } else {
+      const { rows } = await Celula.findCelulaByResponsible("Emery Botsford");
+      res.json(rows);
+    }
+  } else {
+    res.json([]);
+  }
+}
+
+export async function editCelula(req, res) {
+  if (req.authenticated) {
+    if (!req.body.nome || !req.body.responsavel) res.send(400);
+    else {
+      const id = Number(req.params.id);
+      const celula = new CelulaBuilder(req.body.nome, req.body.responsavel);
+      if (req.body.orientador) celula.setOrientador(req.body.orientador);
+      if (req.body.horas) celula.setHoras(req.body.horas);
+      if (req.body.descricao) celula.setDescricao(req.body.descricao);
+      if (req.body.requisitos) celula.setPreRequisitos(req.body.requisitos);
+      if (req.body.orientador) celula.setOrientador(req.body.orientador);
+      const result = await celula.edit(id);
+      if (result) res.send(200);
+      else res.send(404);
+    }
+  } else {
+    res.send(401);
   }
 }

@@ -29,12 +29,12 @@ app.use(cookieParser());
 
 app.use(Authenticate);
 app.use(express.static(path.join(path.dirname("."), "public")));
-app.use((req, res, next) => {
-  console.log(req.url);
-  console.log(req.cookies);
-  console.log(req.body);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.url);
+//   console.log(req.cookies);
+//   console.log(req.body);
+//   next();
+// });
 
 app.get("/", mainPage);
 app.use("/celula", celulaRouter);

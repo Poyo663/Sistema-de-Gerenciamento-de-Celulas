@@ -16,6 +16,19 @@ export class Celula {
     }
   }
 
+  static async findCelulaByResponsible(respName) {
+    try {
+      const { rows, fields, rowCount } = await client.query(
+        "SELECT * FROM celula WHERE responsavel =  $1;",
+        [respName],
+      );
+      return { rows, fields, rowCount };
+    } catch (err) {
+      console.error(err);
+      return undefined;
+    }
+  }
+
   static async findCelula(identifier) {
     try {
       if (typeof identifier === "number") {
@@ -83,6 +96,36 @@ export class CelulaBuilder {
   setPreRequisitos(prerequisitos) {
     this.fields.set("pre_requisitos", prerequisitos);
     return this;
+  }
+
+  async edit(id) {
+    let fields = "";
+    let i = 1;
+    const values = [];
+    const keys = this.fields.keys();
+    let current = keys.next();
+    while (!current.done) {
+      fields += current.value + "=$" + i + ",";
+      values.push(this.fields.get(current.value));
+      i++;
+      current = keys.next();
+    }
+    // removing the ',' at the end
+    fields = fields.slice(0, -1);
+    values.push(id);
+
+    console.log(fields);
+    try {
+      const { rows } = await client.query(
+        `UPDATE celula SET ${fields} WHERE id = $${i}`,
+        values,
+      );
+      if (rows) return true;
+      else return false;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   async build() {
