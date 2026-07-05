@@ -1,27 +1,15 @@
 import path from "path";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import pug from "pug";
 
 import { Celula, CelulaBuilder } from "../models/celula.model.js";
 import { fileURLToPath } from "url";
 import { Participa } from "../models/participa.relation.model.js";
 
-const celulaPageFunction = pug.compileFile("./src/views/celula.pug");
-
 export async function getCelulas(req, res) {
   const { rows } = await Celula.findCelula();
   if (rows) res.send(rows);
   else res.send({});
-}
-
-export async function celulaPage(req, res) {
-  res.sendFile(
-    path.resolve(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "../../public/html/detalhesCelula.html",
-    ),
-  );
 }
 
 export async function celulaId(req, res) {
